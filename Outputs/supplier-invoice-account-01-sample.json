@@ -1,7 +1,34 @@
 {
-	"cursor": "/Users/latona2/bitbucket/sap-api-integrations-supplier-invoice-reads/SAP_API_Caller/caller.go#L122",
+	"cursor": "/Users/latona2/bitbucket/sap-api-integrations-supplier-invoice-reads/SAP_API_Caller/caller.go#L125",
 	"function": "sap-api-integrations-supplier-invoice-reads/SAP_API_Caller.(*SAPAPICaller).Account",
-	"level": "ERROR",
-	"message": "convert error: Result data is not exist",
-	"time": "2022-09-16T19:09:15+09:00"
+	"level": "INFO",
+	"message": [
+		{
+			"SupplierInvoice": "5105600752",
+			"FiscalYear": "1998",
+			"SupplierInvoiceItem": "2",
+			"CompanyCode": "0001",
+			"CostCenter": "100000",
+			"ControllingArea": "0001",
+			"BusinessArea": "",
+			"ProfitCenter": "100000",
+			"FunctionalArea": "",
+			"GLAccount": "472000",
+			"SalesOrder": "",
+			"SalesOrderItem": "0",
+			"CostObject": "",
+			"WBSElement": "",
+			"DocumentCurrency": "EUR",
+			"SuplrInvcAcctAssignmentAmount": "100.00",
+			"TaxCode": "V1",
+			"WorkItem": "",
+			"MasterFixedAsset": "",
+			"FixedAsset": "",
+			"DebitCreditCode": "S",
+			"InternalOrder": "",
+			"ProjectNetwork": "",
+			"ProfitabilitySegment": "0"
+		}
+	],
+	"time": "2022-09-16T21:18:23+09:00"
 }
