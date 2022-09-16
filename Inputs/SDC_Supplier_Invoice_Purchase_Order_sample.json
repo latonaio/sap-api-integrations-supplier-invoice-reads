@@ -39,8 +39,8 @@
 		},
 		"PurchaseOrder": {
 			"SupplierInvoiceItem": "",
-			"PurchaseOrder": "4500000012",
-			"PurchaseOrderItem": "30",
+			"PurchaseOrder": "4500000000",
+			"PurchaseOrderItem": "10",
 			"Plant": "",
 			"TaxCode": "",
 			"DocumentCurrency": "",
@@ -77,8 +77,8 @@
 			"ProfitabilitySegment": ""
 		}
 	},
-	"api_schema": "sap.s4.beh.supplierinvoice.v1.SupplierInvoice.Created.v1",
+	"api_schema": "SupplierInvoiceReads",
 	"accepter": ["PurchaseOrder"],
-	"supplier_invoice": "4500000012",
+	"supplier_invoice": "4500000000",
 	"deleted": false
 }

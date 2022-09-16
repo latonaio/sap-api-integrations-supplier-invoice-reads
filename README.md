@@ -113,10 +113,40 @@ func (c *SAPAPICaller) AsyncGetSupplierInvoice(supplierInvoice, fiscalYear, purc
 
 ```
 {
-	"cursor": "/Users/latona2/bitbucket/sap-api-integrations-supplier-invoice-reads/SAP_API_Caller/caller.go#L50",
+	"cursor": "/Users/latona2/bitbucket/sap-api-integrations-supplier-invoice-reads/SAP_API_Caller/caller.go#L70",
 	"function": "sap-api-integrations-supplier-invoice-reads/SAP_API_Caller.(*SAPAPICaller).Header",
 	"level": "INFO",
-	"message": "[{XXXXXXXXXXXXXXXXXXXXXXXXXXXXX}]",
-	"time": "2021-12-11T15:33:00.054455+09:00"
+	"message": [
+		{
+			"SupplierInvoice": "5105600751",
+			"FiscalYear": "1998",
+			"CompanyCode": "0001",
+			"DocumentDate": "1998-02-01",
+			"PostingDate": "1998-02-01",
+			"SupplierInvoiceIDByInvcgParty": "",
+			"InvoicingParty": "100000",
+			"DocumentCurrency": "EUR",
+			"InvoiceGrossAmount": "928.00",
+			"DocumentHeaderText": "",
+			"PaymentTerms": "",
+			"DueCalculationBaseDate": "1998-02-01",
+			"NetPaymentDays": "0",
+			"PaymentBlockingReason": "",
+			"AccountingDocumentType": "RE",
+			"BPBankAccountInternalID": "",
+			"SupplierInvoiceStatus": "5",
+			"DirectQuotedExchangeRate": "1.00000",
+			"SupplyingCountry": "",
+			"PaymentMethod": "",
+			"InvoiceReference": "",
+			"SupplierPostingLineItemText": "",
+			"TaxIsCalculatedAutomatically": true,
+			"BusinessArea": "",
+			"SupplierInvoiceIsCreditMemo": "",
+			"ReverseDocument": "",
+			"ReverseDocumentFiscalYear": "0000"
+		}
+	],
+	"time": "2022-09-16T18:26:54+09:00"
 }
 ```

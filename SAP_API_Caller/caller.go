@@ -145,7 +145,7 @@ func (c *SAPAPICaller) callSupplierInvoiceSrvAPIRequirementAccount(api, supplier
 }
 
 func (c *SAPAPICaller) PurchaseOrder(purchaseOrder, purchaseOrderItem string) {
-	data, err := c.callSupplierInvoiceSrvAPIRequirementPurchaseOrder("A_SupplierInvoiceTax", purchaseOrder, purchaseOrderItem)
+	data, err := c.callSupplierInvoiceSrvAPIRequirementPurchaseOrder("A_SuplrInvcItemPurOrdRef", purchaseOrder, purchaseOrderItem)
 	if err != nil {
 		c.log.Error(err)
 		return
@@ -176,7 +176,7 @@ func (c *SAPAPICaller) getQueryWithHeader(params map[string]string, supplierInvo
 	if len(params) == 0 {
 		params = make(map[string]string, 1)
 	}
-	params["$filter"] = fmt.Sprintf("SupplierInvoice eq '%s' and SupplierInvoice eq '%s'", supplierInvoice, fiscalYear)
+	params["$filter"] = fmt.Sprintf("SupplierInvoice eq '%s' and FiscalYear eq '%s'", supplierInvoice, fiscalYear)
 	return params
 }
 
@@ -184,7 +184,7 @@ func (c *SAPAPICaller) getQueryWithTax(params map[string]string, supplierInvoice
 	if len(params) == 0 {
 		params = make(map[string]string, 1)
 	}
-	params["$filter"] = fmt.Sprintf("SupplierInvoice eq '%s' and SupplierInvoice eq '%s'", supplierInvoice, fiscalYear)
+	params["$filter"] = fmt.Sprintf("SupplierInvoice eq '%s' and FiscalYear eq '%s'", supplierInvoice, fiscalYear)
 	return params
 }
 
@@ -192,7 +192,7 @@ func (c *SAPAPICaller) getQueryWithAccount(params map[string]string, supplierInv
 	if len(params) == 0 {
 		params = make(map[string]string, 1)
 	}
-	params["$filter"] = fmt.Sprintf("SupplierInvoice eq '%s' and SupplierInvoice eq '%s'", supplierInvoice, fiscalYear)
+	params["$filter"] = fmt.Sprintf("SupplierInvoice eq '%s' and FiscalYear eq '%s'", supplierInvoice, fiscalYear)
 	return params
 }
 

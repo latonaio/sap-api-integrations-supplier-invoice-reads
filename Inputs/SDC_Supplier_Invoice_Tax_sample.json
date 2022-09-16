@@ -4,8 +4,8 @@
 	"redis_key": "abcdefg",
 	"filepath": "/var/lib/aion/Data/rededge_sdc/abcdef.json",
 	"SupplierInvoice": {
-		"SupplierInvoice": "5100000001",
-		"FiscalYear": "2016",
+		"SupplierInvoice": "5105600751",
+		"FiscalYear": "1998",
 		"CompanyCode": "",
 		"DocumentDate": "",
 		"PostingDate": "",
@@ -77,8 +77,8 @@
 			"ProfitabilitySegment": ""
 		}
 	},
-	"api_schema": "sap.s4.beh.supplierinvoice.v1.SupplierInvoice.Created.v1",
+	"api_schema": "SupplierInvoiceReads",
 	"accepter": ["Tax"],
-	"supplier_invoice": "5100000001",
+	"supplier_invoice": "5105600751",
 	"deleted": false
 }

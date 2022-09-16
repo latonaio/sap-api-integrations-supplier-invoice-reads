@@ -1,0 +1,16 @@
+{
+	"cursor": "/Users/latona2/bitbucket/sap-api-integrations-supplier-invoice-reads/SAP_API_Caller/caller.go#L97",
+	"function": "sap-api-integrations-supplier-invoice-reads/SAP_API_Caller.(*SAPAPICaller).Tax",
+	"level": "INFO",
+	"message": [
+		{
+			"SupplierInvoice": "5105600751",
+			"FiscalYear": "1998",
+			"TaxCode": "V1",
+			"DocumentCurrency": "EUR",
+			"TaxAmount": "128.00",
+			"TaxBaseAmountInTransCrcy": "800.00"
+		}
+	],
+	"time": "2022-09-16T18:28:24+09:00"
+}
