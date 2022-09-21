@@ -62,12 +62,34 @@ func (c *SAPAPICaller) AsyncGetSupplierInvoice(supplierInvoice, fiscalYear, purc
 }
 
 func (c *SAPAPICaller) Header(supplierInvoice, fiscalYear string) {
-	data, err := c.callSupplierInvoiceSrvAPIRequirementHeader("A_SupplierInvoice", supplierInvoice, fiscalYear)
+	headerData, err := c.callSupplierInvoiceSrvAPIRequirementHeader("A_SupplierInvoice", supplierInvoice, fiscalYear)
 	if err != nil {
 		c.log.Error(err)
-		return
+	} else {
+		c.log.Info(headerData)
 	}
-	c.log.Info(data)
+
+	purchaseOrderData, err := c.callToPurchaseOrder(headerData[0].ToPurchaseOrder)
+	if err != nil {
+		c.log.Error(err)
+	} else {
+		c.log.Info(purchaseOrderData)
+	}
+
+	glAccountData, err := c.callToGLAccount(headerData[0].ToGLAccount)
+	if err != nil {
+		c.log.Error(err)
+	} else {
+		c.log.Info(glAccountData)
+	}
+
+	taxData, err := c.callToTax(headerData[0].ToTax)
+	if err != nil {
+		c.log.Error(err)
+	} else {
+		c.log.Info(taxData)
+	}
+	return
 }
 
 func (c *SAPAPICaller) callSupplierInvoiceSrvAPIRequirementHeader(api, supplierInvoice, fiscalYear string) ([]sap_api_output_formatter.Header, error) {
@@ -82,6 +104,51 @@ func (c *SAPAPICaller) callSupplierInvoiceSrvAPIRequirementHeader(api, supplierI
 
 	byteArray, _ := ioutil.ReadAll(resp.Body)
 	data, err := sap_api_output_formatter.ConvertToHeader(byteArray, c.log)
+	if err != nil {
+		return nil, fmt.Errorf("convert error: %w", err)
+	}
+	return data, nil
+}
+
+func (c *SAPAPICaller) callToGLAccount(url string) ([]sap_api_output_formatter.ToGLAccount, error) {
+	resp, err := c.requestClient.Request("GET", url, map[string]string{}, "")
+	if err != nil {
+		return nil, fmt.Errorf("API request error: %w", err)
+	}
+	defer resp.Body.Close()
+
+	byteArray, _ := ioutil.ReadAll(resp.Body)
+	data, err := sap_api_output_formatter.ConvertToToGLAccount(byteArray, c.log)
+	if err != nil {
+		return nil, fmt.Errorf("convert error: %w", err)
+	}
+	return data, nil
+}
+
+func (c *SAPAPICaller) callToPurchaseOrder(url string) ([]sap_api_output_formatter.ToPurchaseOrder, error) {
+	resp, err := c.requestClient.Request("GET", url, map[string]string{}, "")
+	if err != nil {
+		return nil, fmt.Errorf("API request error: %w", err)
+	}
+	defer resp.Body.Close()
+
+	byteArray, _ := ioutil.ReadAll(resp.Body)
+	data, err := sap_api_output_formatter.ConvertToToPurchaseOrder(byteArray, c.log)
+	if err != nil {
+		return nil, fmt.Errorf("convert error: %w", err)
+	}
+	return data, nil
+}
+
+func (c *SAPAPICaller) callToTax(url string) ([]sap_api_output_formatter.ToTax, error) {
+	resp, err := c.requestClient.Request("GET", url, map[string]string{}, "")
+	if err != nil {
+		return nil, fmt.Errorf("API request error: %w", err)
+	}
+	defer resp.Body.Close()
+
+	byteArray, _ := ioutil.ReadAll(resp.Body)
+	data, err := sap_api_output_formatter.ConvertToToTax(byteArray, c.log)
 	if err != nil {
 		return nil, fmt.Errorf("convert error: %w", err)
 	}
@@ -116,6 +183,57 @@ func (c *SAPAPICaller) callSupplierInvoiceSrvAPIRequirementTax(api, supplierInvo
 	return data, nil
 }
 
+func (c *SAPAPICaller) PurchaseOrder(purchaseOrder, purchaseOrderItem string) {
+	purchaseOrderData, err := c.callSupplierInvoiceSrvAPIRequirementPurchaseOrder("A_SuplrInvcItemPurOrdRef", purchaseOrder, purchaseOrderItem)
+	if err != nil {
+		c.log.Error(err)
+	} else {
+		c.log.Info(purchaseOrderData)
+	}
+
+	accountData, err := c.callToGLAccount(purchaseOrderData[0].ToAccount)
+	if err != nil {
+		c.log.Error(err)
+	} else {
+		c.log.Info(accountData)
+	}
+	return
+}
+
+func (c *SAPAPICaller) callSupplierInvoiceSrvAPIRequirementPurchaseOrder(api, purchaseOrder, purchaseOrderItem string) ([]sap_api_output_formatter.PurchaseOrder, error) {
+	url := strings.Join([]string{c.baseURL, "API_SUPPLIERINVOICE_PROCESS_SRV", api}, "/")
+
+	param := c.getQueryWithPurchaseOrder(map[string]string{}, purchaseOrder, purchaseOrderItem)
+
+	resp, err := c.requestClient.Request("GET", url, param, "")
+	if err != nil {
+		return nil, fmt.Errorf("API request error: %w", err)
+	}
+	defer resp.Body.Close()
+
+	byteArray, _ := ioutil.ReadAll(resp.Body)
+	data, err := sap_api_output_formatter.ConvertToPurchaseOrder(byteArray, c.log)
+	if err != nil {
+		return nil, fmt.Errorf("convert error: %w", err)
+	}
+	return data, nil
+}
+
+func (c *SAPAPICaller) callToAccount(url string) ([]sap_api_output_formatter.ToAccount, error) {
+	resp, err := c.requestClient.Request("GET", url, map[string]string{}, "")
+	if err != nil {
+		return nil, fmt.Errorf("API request error: %w", err)
+	}
+	defer resp.Body.Close()
+
+	byteArray, _ := ioutil.ReadAll(resp.Body)
+	data, err := sap_api_output_formatter.ConvertToToAccount(byteArray, c.log)
+	if err != nil {
+		return nil, fmt.Errorf("convert error: %w", err)
+	}
+	return data, nil
+}
+
 func (c *SAPAPICaller) Account(supplierInvoice, fiscalYear string) {
 	data, err := c.callSupplierInvoiceSrvAPIRequirementAccount("A_SuplrInvcItemAcctAssgmt", supplierInvoice, fiscalYear)
 	if err != nil {
@@ -138,34 +256,6 @@ func (c *SAPAPICaller) callSupplierInvoiceSrvAPIRequirementAccount(api, supplier
 
 	byteArray, _ := ioutil.ReadAll(resp.Body)
 	data, err := sap_api_output_formatter.ConvertToAccount(byteArray, c.log)
-	if err != nil {
-		return nil, fmt.Errorf("convert error: %w", err)
-	}
-	return data, nil
-}
-
-func (c *SAPAPICaller) PurchaseOrder(purchaseOrder, purchaseOrderItem string) {
-	data, err := c.callSupplierInvoiceSrvAPIRequirementPurchaseOrder("A_SuplrInvcItemPurOrdRef", purchaseOrder, purchaseOrderItem)
-	if err != nil {
-		c.log.Error(err)
-		return
-	}
-	c.log.Info(data)
-}
-
-func (c *SAPAPICaller) callSupplierInvoiceSrvAPIRequirementPurchaseOrder(api, purchaseOrder, purchaseOrderItem string) ([]sap_api_output_formatter.PurchaseOrder, error) {
-	url := strings.Join([]string{c.baseURL, "API_SUPPLIERINVOICE_PROCESS_SRV", api}, "/")
-
-	param := c.getQueryWithPurchaseOrder(map[string]string{}, purchaseOrder, purchaseOrderItem)
-
-	resp, err := c.requestClient.Request("GET", url, param, "")
-	if err != nil {
-		return nil, fmt.Errorf("API request error: %w", err)
-	}
-	defer resp.Body.Close()
-
-	byteArray, _ := ioutil.ReadAll(resp.Body)
-	data, err := sap_api_output_formatter.ConvertToPurchaseOrder(byteArray, c.log)
 	if err != nil {
 		return nil, fmt.Errorf("convert error: %w", err)
 	}

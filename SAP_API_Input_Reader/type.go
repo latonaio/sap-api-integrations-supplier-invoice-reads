@@ -85,13 +85,7 @@ type SDC struct {
 		SupplierInvoiceIsCreditMemo   string `json:"SupplierInvoiceIsCreditMemo"`
 		ReverseDocument               string `json:"ReverseDocument"`
 		ReverseDocumentFiscalYear     string `json:"ReverseDocumentFiscalYear"`
-		Tax                           struct {
-			TaxCode                  string `json:"TaxCode"`
-			DocumentCurrency         string `json:"DocumentCurrency"`
-			TaxAmount                string `json:"TaxAmount"`
-			TaxBaseAmountInTransCrcy string `json:"TaxBaseAmountInTransCrcy"`
-		} `json:"Tax"`
-		PurchaseOrder struct {
+		PurchaseOrder                 struct {
 			SupplierInvoiceItem            string `json:"SupplierInvoiceItem"`
 			PurchaseOrder                  string `json:"PurchaseOrder"`
 			PurchaseOrderItem              string `json:"PurchaseOrderItem"`
@@ -105,31 +99,81 @@ type SDC struct {
 			QtyInPurchaseOrderPriceUnit    string `json:"QtyInPurchaseOrderPriceUnit"`
 			SupplierInvoiceItemText        string `json:"SupplierInvoiceItemText"`
 			PurchasingDocumentItemCategory string `json:"PurchasingDocumentItemCategory"`
+			AccountAssignment              struct {
+				SupplierInvoiceItem           string `json:"SupplierInvoiceItem"`
+				CompanyCode                   string `json:"CompanyCode"`
+				CostCenter                    string `json:"CostCenter"`
+				ControllingArea               string `json:"ControllingArea"`
+				BusinessArea                  string `json:"BusinessArea"`
+				ProfitCenter                  string `json:"ProfitCenter"`
+				FunctionalArea                string `json:"FunctionalArea"`
+				GLAccount                     string `json:"GLAccount"`
+				SalesOrder                    string `json:"SalesOrder"`
+				SalesOrderItem                string `json:"SalesOrderItem"`
+				CostObject                    string `json:"CostObject"`
+				WBSElement                    string `json:"WBSElement"`
+				DocumentCurrency              string `json:"DocumentCurrency"`
+				SuplrInvcAcctAssignmentAmount string `json:"SuplrInvcAcctAssignmentAmount"`
+				TaxCode                       string `json:"TaxCode"`
+				WorkItem                      string `json:"WorkItem"`
+				MasterFixedAsset              string `json:"MasterFixedAsset"`
+				FixedAsset                    string `json:"FixedAsset"`
+				DebitCreditCode               string `json:"DebitCreditCode"`
+				InternalOrder                 string `json:"InternalOrder"`
+				ProjectNetwork                string `json:"ProjectNetwork"`
+				ProfitabilitySegment          string `json:"ProfitabilitySegment"`
+			} `json:"AccountAssignment"`
 		} `json:"PurchaseOrder"`
-		AccountAssignment struct {
-			SupplierInvoiceItem           string `json:"SupplierInvoiceItem"`
-			CompanyCode                   string `json:"CompanyCode"`
-			CostCenter                    string `json:"CostCenter"`
-			ControllingArea               string `json:"ControllingArea"`
-			BusinessArea                  string `json:"BusinessArea"`
-			ProfitCenter                  string `json:"ProfitCenter"`
-			FunctionalArea                string `json:"FunctionalArea"`
-			GLAccount                     string `json:"GLAccount"`
-			SalesOrder                    string `json:"SalesOrder"`
-			SalesOrderItem                string `json:"SalesOrderItem"`
-			CostObject                    string `json:"CostObject"`
-			WBSElement                    string `json:"WBSElement"`
-			DocumentCurrency              string `json:"DocumentCurrency"`
-			SuplrInvcAcctAssignmentAmount string `json:"SuplrInvcAcctAssignmentAmount"`
-			TaxCode                       string `json:"TaxCode"`
-			WorkItem                      string `json:"WorkItem"`
-			MasterFixedAsset              string `json:"MasterFixedAsset"`
-			FixedAsset                    string `json:"FixedAsset"`
-			DebitCreditCode               string `json:"DebitCreditCode"`
-			InternalOrder                 string `json:"InternalOrder"`
-			ProjectNetwork                string `json:"ProjectNetwork"`
-			ProfitabilitySegment          string `json:"ProfitabilitySegment"`
-		} `json:"AccountAssignment"`
+		GLAccount struct {
+			SupplierInvoice            string `json:"SupplierInvoice"`
+			FiscalYear                 string `json:"FiscalYear"`
+			SupplierInvoiceItem        string `json:"SupplierInvoiceItem"`
+			CompanyCode                string `json:"CompanyCode"`
+			CostCenter                 string `json:"CostCenter"`
+			ControllingArea            string `json:"ControllingArea"`
+			BusinessArea               string `json:"BusinessArea"`
+			ProfitCenter               string `json:"ProfitCenter"`
+			FunctionalArea             string `json:"FunctionalArea"`
+			GLAccount                  string `json:"GLAccount"`
+			SalesOrder                 string `json:"SalesOrder"`
+			SalesOrderItem             string `json:"SalesOrderItem"`
+			CostObject                 string `json:"CostObject"`
+			CostCtrActivityType        string `json:"CostCtrActivityType"`
+			BusinessProcess            string `json:"BusinessProcess"`
+			WBSElement                 string `json:"WBSElement"`
+			DocumentCurrency           string `json:"DocumentCurrency"`
+			SupplierInvoiceItemAmount  string `json:"SupplierInvoiceItemAmount"`
+			TaxCode                    string `json:"TaxCode"`
+			PersonnelNumber            string `json:"PersonnelNumber"`
+			WorkItem                   string `json:"WorkItem"`
+			DebitCreditCode            string `json:"DebitCreditCode"`
+			TaxJurisdiction            string `json:"TaxJurisdiction"`
+			SupplierInvoiceItemText    string `json:"SupplierInvoiceItemText"`
+			AssignmentReference        string `json:"AssignmentReference"`
+			IsNotCashDiscountLiable    bool   `json:"IsNotCashDiscountLiable"`
+			InternalOrder              string `json:"InternalOrder"`
+			ProjectNetwork             string `json:"ProjectNetwork"`
+			NetworkActivity            string `json:"NetworkActivity"`
+			CommitmentItem             string `json:"CommitmentItem"`
+			FundsCenter                string `json:"FundsCenter"`
+			TaxBaseAmountInTransCrcy   string `json:"TaxBaseAmountInTransCrcy"`
+			Fund                       string `json:"Fund"`
+			GrantID                    string `json:"GrantID"`
+			QuantityUnit               string `json:"QuantityUnit"`
+			SuplrInvcItmQtyUnitSAPCode string `json:"SuplrInvcItmQtyUnitSAPCode"`
+			SuplrInvcItmQtyUnitISOCode string `json:"SuplrInvcItmQtyUnitISOCode"`
+			Quantity                   string `json:"Quantity"`
+			PartnerBusinessArea        string `json:"PartnerBusinessArea"`
+			FinancialTransactionType   string `json:"FinancialTransactionType"`
+			TaxCountry                 string `json:"TaxCountry"`
+			BudgetPeriod               string `json:"BudgetPeriod"`
+		} `json:"GLAccount"`
+		Tax struct {
+			TaxCode                  string `json:"TaxCode"`
+			DocumentCurrency         string `json:"DocumentCurrency"`
+			TaxAmount                string `json:"TaxAmount"`
+			TaxBaseAmountInTransCrcy string `json:"TaxBaseAmountInTransCrcy"`
+		} `json:"Tax"`
 	} `json:"SupplierInvoice"`
 	APISchema         string   `json:"api_schema"`
 	Accepter          []string `json:"accepter"`

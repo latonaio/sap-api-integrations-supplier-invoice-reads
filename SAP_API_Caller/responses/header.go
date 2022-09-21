@@ -35,6 +35,21 @@ type Header struct {
 			SupplierInvoiceIsCreditMemo   string `json:"SupplierInvoiceIsCreditMemo"`
 			ReverseDocument               string `json:"ReverseDocument"`
 			ReverseDocumentFiscalYear     string `json:"ReverseDocumentFiscalYear"`
+			ToPurchaseOrder               struct {
+				Deferred struct {
+					URI string `json:"uri"`
+				} `json:"__deferred"`
+			} `json:"to_SuplrInvcItemPurOrdRef"`
+			ToGLAccount struct {
+				Deferred struct {
+					URI string `json:"uri"`
+				} `json:"__deferred"`
+			} `json:"to_SupplierInvoiceItemGLAcct"`
+			ToTax struct {
+				Deferred struct {
+					URI string `json:"uri"`
+				} `json:"__deferred"`
+			} `json:"to_SupplierInvoiceTax"`
 		} `json:"results"`
 	} `json:"d"`
 }
